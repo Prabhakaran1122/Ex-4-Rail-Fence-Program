@@ -19,7 +19,54 @@ STEP-4: Arrange the characters of the keyword in sorted order and the correspond
 STEP-5: Read the characters row wise or column wise in the former order to get the cipher text.
 
 # PROGRAM
+```
+#include <stdio.h>
+#include <string.h>
+
+void railFenceEncrypt(char text[], int key) 
+{
+    int len = strlen(text);
+    char rail[key][len];
+    
+    for(int i=0;i<key;i++)
+        for(int j=0;j<len;j++)
+            rail[i][j] = '\n';
+    
+    int row = 0, dir = 0;
+    for(int i=0;i<len;i++) {
+        rail[row][i] = text[i];
+        if(row==0) dir = 1;
+        else if(row==key-1) dir = 0;
+        row += dir ? 1 : -1;
+    }
+    
+    printf("Cipher Text: ");
+    for(int i=0;i<key;i++)
+        for(int j=0;j<len;j++)
+            if(rail[i][j] != '\n')
+                printf("%c", rail[i][j]);
+}
+
+int main() 
+{
+    char text[100];
+    int key;
+    
+    printf("Enter plain text: ");
+    scanf("%s", text);
+    printf("Enter key (number of rails): ");
+    scanf("%d", &key);
+    
+    railFenceEncrypt(text, key);
+    
+    return 0;
+}
+
+```
 
 # OUTPUT
+<img width="1629" height="849" alt="image" src="https://github.com/user-attachments/assets/6d6c0775-e939-474d-a312-7309148d6227" />
+
 
 # RESULT
+Thus, the C program to implement the Rail Fence Row & Column Transformation technique was successfully executed and the ciphertext was obtained.
